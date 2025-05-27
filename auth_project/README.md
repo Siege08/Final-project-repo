@@ -7,8 +7,25 @@ All endpoints require JWT authentication. Obtain a token via `/api/login/` and i
 
 ### User Registration
 - **POST** `/api/register/`
-  - **Body:** `{ "username": "user", "email": "user@email.com", "password": "pass" }`
-  - **Response:** `{ "username": "user", "email": "user@email.com" }`
+  - **Body:**
+    - `username`: string (required)
+    - `email`: string (required)
+    - `password`: string (required)
+    - `photo`: image file (optional, JPEG/PNG/WebP, max 2MB, auto-cropped to 1:1)
+  - **Headers:** `Content-Type: multipart/form-data`
+  - **Sample Request (form-data):**
+    - username: user
+    - email: user@email.com
+    - password: pass
+    - photo: (attach file)
+  - **Sample Response:**
+    ```json
+    {
+      "username": "user",
+      "email": "user@email.com",
+      "photo": "/media/user_photos/yourphoto.jpg"
+    }
+    ```
 
 ### Login (JWT Token)
 - **POST** `/api/login/`

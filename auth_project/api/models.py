@@ -1,7 +1,9 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.conf import settings
 
 class CustomUser(AbstractUser):
+    photo = models.ImageField(upload_to='user_photos/', null=True, blank=True)
     pass  # You can extend this later
 
 class Post(models.Model):
