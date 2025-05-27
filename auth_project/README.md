@@ -69,10 +69,20 @@ All endpoints require JWT authentication. Obtain a token via `/api/login/` and i
 
 ---
 
+## Rate Limiting
+All endpoints are rate-limited to 5 requests per minute per user (if authenticated) or per IP (if unauthenticated). If you exceed this limit, you will receive a 429 Too Many Requests error.
+
+- **429 Too Many Requests:**
+  - **Response:** `{ "detail": "Too many requests. Please try again later." }`
+
+---
+
 ## Error Handling
 - **401 Unauthorized:** Returned if token is missing or invalid.
 - **403 Forbidden:** Returned if you try to modify/delete another user's post or comment.
 - **400 Bad Request:** For invalid data.
+- **429 Too Many Requests:** Returned if you exceed the allowed number of requests per minute.
+  - **Sample Response:** `{ "detail": "Too many requests. Please try again later." }`
 
 ---
 
